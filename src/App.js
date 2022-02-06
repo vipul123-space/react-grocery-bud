@@ -1,9 +1,9 @@
 import "./App.css";
-
+import Grocery from "./Component/Grocery";
 function App() {
   return (
     <>
-      <h1>Hello</h1>
+      <Grocery />
     </>
   );
 }
