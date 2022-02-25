@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "./Modal";
 import { reducer } from "./Reducer";
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("list");
+  if (list) {
+    return JSON.parse(localStorage.getItem("list"));
+  } else {
+    return [];
+  }
+};
 const defaultState = {
-  groceryItems: [],
+  groceryItems: getLocalStorage(),
   modalContent: "",
   setShowmodal: false,
   modalColor: "",
@@ -42,6 +50,11 @@ function Grocery() {
     setIsEditId(id);
     state.isEditing = true;
   };
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(state.groceryItems));
+  }, [state.groceryItems]);
+
   return (
     <>
       <section className="grocery__container">
